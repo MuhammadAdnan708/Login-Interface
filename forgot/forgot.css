@@ -1,0 +1,304 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #efcdcd, #fa7dca); /* Softer gradient */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    overflow: hidden; /* Prevent scrolling */
+}
+.background{
+    width: 330px;
+    height: 420px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.background .shape{
+    height: 120px;
+    width: 120px;
+    position: absolute;
+    border-radius: 50%;
+}
+.shape:first-child{
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    left: -90px;
+    top: -30px;
+}
+.shape:last-child{
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    right: -90px;
+    bottom: -30px;
+}
+
+/* Forgot Password Container */
+.forgot-container {
+    max-width: 420px;
+    margin: 120px auto;
+    padding: 35px 25px;
+    border-radius: 15px;
+   
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.05); /* Luxurious shadow */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    font-family: 'Poppins', sans-serif;
+    animation: slideIn 0.5s ease-out;
+}
+
+.forgot-container h1 {
+    font-size: 30px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.forgot-container p {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+/* Input & Button Styling */
+.forgot-container input
+ {
+    width: 100%;
+    margin-left: -10px;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Input Focus */
+.forgot-container input:focus,
+.forgot-container button:focus {
+    border: 1px solid #3f51b5;
+    box-shadow: 0 0 10px rgba(63, 81, 181, 0.4);
+}
+
+/* Button Styling */
+.forgot-container button {
+    background-color: #ff5f6d; /* Gradient Green Button */
+    color: white;
+    font-weight: 300;
+    cursor: pointer;
+    height: 50px;
+   
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+    width:50%;
+    margin: 12px 0 ;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    
+    transition: all 0.3s ease-in-out;
+    font-family: 'Poppins', sans-serif;
+}
+
+.forgot-container button:hover {
+    background-color: #ffc3a0;
+    transform: scale(1.05);
+}
+
+.forgot-container .back-link {
+    display: block;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ff5f6d;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-container .back-link:hover {
+    color: #ffc3a0;
+    text-decoration: underline;
+}
+
+/* Overlapping Modal */
+.modal {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    width: 90%;
+    max-width: 420px;
+    padding: 35px;
+    background: linear-gradient(135deg, #efcdcd, #fa7dca); /* Softer gradient */
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    display: none; /* Hidden by default */
+    text-align: center;
+    animation: fadeInModal 0.5s ease-out;
+}
+
+.modal h2,.modals h2 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.modal label,
+.modal select,
+.modal input,.modals label,
+.modals select,
+.modals input {
+    display: block;
+    margin: 15px auto;
+    width: 90%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Input Focus in Modal */
+.modal select:focus,
+.modal input:focus,.modals select:focus,
+.modals input:focus {
+    border-color: #2196f3;
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.4);
+}
+
+/* Submit Button in Modal */
+.modal button,.modals button {
+    display: flex;
+    width: 40%;
+    padding: 14px;
+    margin-top: 15px;
+    margin-left: 30px;
+    background-color: #ff5f6d;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal button:hover,.modals button:hover {
+    background-color: #ffc3a0;
+    transform: scale(1.05);
+}
+
+/* Cancel Button */
+.modal button:last-of-type,.modals button:last-of-type {
+    background-color: #ff5f6d;
+    display: flex;
+    margin-top: -43px;
+    margin-left: 200px;
+}
+
+.modal button:last-of-type:hover,.modals button:last-of-type:hover  {
+    background-color: #ffc3a0;
+}
+
+/* Blurred Background Effect */
+body.modal-active .forgot-container,body.modals-active .forgot-container {
+    filter: blur(6px); /* Stronger blur for background */
+    opacity: 0.7; /* Dim background content */
+    pointer-events: none; /* Prevent interaction */
+}
+.modals {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    width: 90%;
+    max-width: 420px;
+    padding: 35px;
+    background: linear-gradient(135deg, #efcdcd, #fa7dca);
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    display: none; /* Hidden by default */
+    text-align: center;
+    animation: fadeInModal 0.5s ease-out;
+}
+/* Keyframes for Slide-In Effect */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes for Fade-In Effect for Modal */
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -25%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -20%);
+    }
+}
+/* Style for the password input group */
+.password-group {
+    position: relative;
+}
+
+/* Style for the password input */
+.password-group input {
+    width: 100%;
+    padding-right: 40px; /* Add space for the eye icon */
+}
+
+/* Style for the eye icon */
+.password-group i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+}
+
+/* Hover effect for the eye icon */
+.password-group i:hover {
+  
+    color: #333;
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}

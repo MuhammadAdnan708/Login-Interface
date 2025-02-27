@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="forgot.css">
+    <!-- Add Font Awesome for the eye icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="forgot-container">
+        <h1>Forgot Password</h1>
+        <p>Enter your email to reset your password.</p>
+        <form id="forgotForm">
+            <label for="emailOrUsername">Email:</label>
+            <input type="text" id="emailOrUsername" placeholder="Enter your email" required>
+            <button type="submit">Reset Password</button>
+        </form>
+        <p id="message"></p>
+        <a href="../login User/index.html" class="back-link">Back to Login</a>
+    </div>
+
+    <!-- Security Question Modal -->
+    <div id="securityModal" class="modal">
+        <h2>Answer Security Question</h2>
+        <form id="securityForm">
+            <label for="selectedQuestion">Select Question</label>
+            <select id="selectedQuestion" required>
+                <option value="" disabled selected>Select a question</option>
+            </select>
+            <input type="text" id="securityAnswer" placeholder="Your Answer" required>
+            <button type="submit">Submit</button>
+            <button type="button" class="cancel-button">Cancel</button>
+        </form>
+    </div>
+
+    <!-- New Password Modal -->
+  
+<div id="passwordModal" class="modal">
+    <h2>Create a New Password</h2>
+    <form id="newPasswordForm">
+        <label for="newPassword">New Password</label>
+        <div class="password-group">
+            <input type="password" id="newPassword" placeholder="Enter new password" required>
+            <i class="fas fa-eye" id="toggleNewPassword"></i> <!-- Eye icon for new password -->
+        </div>
+        <span id="newPasswordError" class="error"></span> <!-- Error message for new password -->
+
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-group">
+            <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
+            <i class="fas fa-eye" id="toggleConfirmPassword"></i> <!-- Eye icon for confirm password -->
+        </div>
+        <span id="confirmPasswordError" class="error"></span> <!-- Error message for confirm password -->
+
+        <button type="submit">Save Password</button>
+        <button type="button" class="cancel-button">Cancel</button>
+    </form>
+</div>
+
+    <script src="forgot.js"></script>
+</body>
+</html>
