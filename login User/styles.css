@@ -1,0 +1,233 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Body styles */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #efcdcd, #fa7dca); /* Softer gradient */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    overflow: hidden; /* Prevent scrolling */
+  }
+  .background{
+    width: 330px;
+    height: 420px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.background .shape{
+    height: 120px;
+    width: 120px;
+    position: absolute;
+    border-radius: 50%;
+}
+.shape:first-child{
+    background: linear-gradient(
+        #1845ad,
+        #23a2f6
+    );
+    left: -100px;
+    top: -80px;
+}
+.shape:last-child{
+    background: linear-gradient(
+        to right,
+        #ff512f,
+        #f09819
+    );
+    right: -80px;
+    bottom: -80px;
+}
+
+  /* Login container */
+  .login-container {
+   
+  padding: 40px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 380px;
+    overflow: auto;
+    text-align: center;
+    border: 1px solid #dbdbdb;
+  }
+  
+  .login-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #333;
+  }
+  .login-form{
+height: 450px;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+  }
+  /* Logo container */
+  .logo-container img {
+    width: 120px;
+    margin-bottom: 30px;
+  }
+  
+  /* Subtext */
+  .subtext {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 30px;
+  }
+  
+  /* Input fields */
+  .input-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+    font-size: 14px;
+    color: #333;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .input-group input:focus {
+    border-color: #0095f6;
+    outline: none;
+  }
+  
+  .input-group input::placeholder {
+    color: #999;
+  }
+  
+  /* Remember Me Checkbox */
+  .remember-me {
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: flex;
+    
+    align-items: center;
+  }
+  
+  .remember-me input {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  
+  /* Login button */
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #ff5f6d;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .login-btn:hover {
+    background-color: #ffc3a0; /* Hover effect */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(255, 95, 109, 0.3);
+  }
+  
+  /* Forgot password link */
+  .forgot-password {
+    margin-top: 20px;
+  }
+  
+  .forgot-password a {
+    font-size: 14px;
+    color: #0095f6;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease-in-out;
+  }
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Sign up prompt */
+  .signup-prompt {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .signup-prompt a {
+    color: #0095f6;
+    text-decoration: none;
+  }
+  
+  .signup-prompt a:hover {
+    text-decoration: underline;
+  }
+  /* Style for the password input group */
+.password-group {
+    position: relative;
+  }
+  
+  /* Style for the password input */
+  .password-group input {
+    width: 100%;
+    padding-right: 40px; /* Add space for the eye icon */
+  }
+  
+  /* Style for the eye icon */
+  .password-group #togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+  }
+  
+  /* Hover effect for the eye icon */
+  .password-group #togglePassword:hover {
+    color: #333;
+  }
+  
+  /* Add responsiveness for small devices */
+  @media (max-width: 400px) {
+    .login-container {
+      width: 90%;
+      padding: 30px;
+    }
+  
+    .logo-container img {
+      width: 100px;
+    }
+  
+    .login-btn {
+      font-size: 14px;
+    }
+  }
+  
