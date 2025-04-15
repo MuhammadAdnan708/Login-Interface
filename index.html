@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haider Sports Cricket League 2025</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0c4b8a;
+      --secondary: #f8c537;
+      --accent: #e63946;
+      --light: #f8f9ff;
+      --dark: #1a1a2e;
+      --text: #333333;
+      --card-bg: #ffffff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary), #1a3e72);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      margin-bottom: 50px;
+    }
+    
+    .header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
+      opacity: 0.6;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border: 4px solid var(--secondary);
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: rotate(15deg);
+    }
+    
+    .logo span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: linear-gradient(to right, white, #f8f8f8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+    
+    .season-badge {
+      display: inline-block;
+      background-color: var(--accent);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Main Content */
+    main {
+      padding: 2rem 0 4rem;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .section-title h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      display: inline-block;
+      padding-bottom: 0.5rem;
+      position: relative;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+    
+    /* Groups Grid */
+    .groups-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      margin-top: 2rem;
+    }
+    
+    .group-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .group-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(12,75,138,0.03) 0%, rgba(248,197,55,0.03) 100%);
+      z-index: -1;
+    }
+    
+    .group-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+    
+    .group-header {
+      background: linear-gradient(135deg, var(--primary), #1a56a5);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    }
+    
+    .group-header h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0;
+      position: relative;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .group-header h3::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--secondary);
+      border-radius: 3px;
+    }
+    
+    .team-list {
+      padding: 1.5rem 2rem;
+    }
+    
+    .team-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px dashed rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .team-item:last-child {
+      border-bottom: none;
+    }
+    
+    .team-item:hover {
+      transform: translateX(10px);
+    }
+    
+    .team-number {
+      width: 36px;
+      height: 36px;
+      background: var(--secondary);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-right: 1.2rem;
+      flex-shrink: 0;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(248, 197, 55, 0.3);
+    }
+    
+    .team-name {
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 1.1rem;
+      flex-grow: 1;
+    }
+    
+    .team-city {
+      font-size: 0.85rem;
+      color: var(--text);
+      opacity: 0.7;
+      margin-top: 3px;
+    }
+    
+    .team-details {
+      flex-grow: 1;
+    }
+    
+    .team-captain {
+      display: inline-block;
+      background: rgba(230, 57, 70, 0.1);
+      color: var(--accent);
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 4rem 0 2rem;
+      text-align: center;
+      position: relative;
+      clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
+    }
+    
+    .footer-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
+      opacity: 0.4;
+    }
+    
+    .footer-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .footer-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, var(--secondary), white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .footer-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    .footer-link:hover {
+      color: var(--secondary);
+    }
+    
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--secondary);
+      transition: width 0.3s ease;
+    }
+    
+    .footer-link:hover::after {
+      width: 100%;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .social-link {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .social-link:hover {
+      background: var(--secondary);
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-top: 2rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .groups-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        padding: 2rem 0;
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .logo {
+        width: 90px;
+        height: 90px;
+      }
+      
+      .logo span {
+        font-size: 2.2rem;
+      }
+      
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+      
+      .group-header h3 {
+        font-size: 1.5rem;
+      }
+      
+      .team-name {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .footer-links {
+        gap: 1.5rem;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-overlay"></div>
+    <div class="container header-content">
+      <div class="logo">
+        <span>HSCL</span>
+      </div>
+      <h1>Haider Sports Cricket League</h1>
+      <div class="subtitle">Manga Cricket Tournament</div>
+      <div class="season-badge">Season 2025</div>
+    </div>
+  </header>
+  
+  <main>
+    <div class="container">
+      <div class="section-title">
+        <h2>Tournament Groups</h2>
+      </div>
+      
+      <div class="groups-container">
+        <!-- Group A -->
+        <div class="group-card">
+          <div class="group-header">
+            <h3>Group A</h3>
+          </div>
+          <div class="team-list">
+            <div class="team-item">
+              <div class="team-number">1</div>
+              <div class="team-details">
+                <div class="team-name">King XI</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Aftab
+                </span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">2</div>
+              <div class="team-details">
+                <div class="team-name">Combine XI</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Riaz
+                </span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">3</div>
+              <div class="team-details">
+                <div class="team-name">Kashan King</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Kashif
+                </span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">4</div>
+              <div class="team-details">
+                <div class="team-name">Sunrises</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Sabir
+                </span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">5</div>
+              <div class="team-details">
+                <div class="team-name">Manga Tiger</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Asif Pola
+                </span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">6</div>
+              <div class="team-details">
+                <div class="team-name">Zaitoon XI</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Zahid
+                </span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">7</div>
+              <div class="team-details">
+                <div class="team-name">Don XI</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Babar
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Group B -->
+        <div class="group-card">
+          <div class="group-header">
+            <h3>Group B</h3>
+          </div>
+          <div class="team-list">
+            <div class="team-item">
+              <div class="team-number">1</div>
+              <div class="team-details">
+                <div class="team-name">Young Challenge</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Hasan butt
+                </span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">2</div>
+              <div class="team-details">
+                <div class="team-name">New Asian</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Nasir</span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">3</div>
+              <div class="team-details">
+                <div class="team-name">Bhai XI</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Master Aslam</span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">4</div>
+              <div class="team-details">
+                <div class="team-name">Combine Star</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Mehboob</span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">5</div>
+              <div class="team-details">
+                <div class="team-name">Manga Gymkhana</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Babar
+                </span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">6</div>
+              <div class="team-details">
+                <div class="team-name">Manga Sixer</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Tasawar
+                </span>
+              </div>
+            </div>
+            <div class="team-item">
+              <div class="team-number">7</div>
+              <div class="team-details">
+                <div class="team-name">Unique Star</div>
+                <div class="team-city">Manga Mandi</div>
+                <span class="team-captain">Captain: Chand Dogar
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-overlay"></div>
+    <div class="container footer-content">
+      <div class="footer-logo">HSCL</div>
+      
+      <div class="footer-links">
+        <a href="#" class="footer-link">Home</a>
+        <a href="#" class="footer-link">Teams</a>
+        <a href="#" class="footer-link">Schedule</a>
+        <a href="#" class="footer-link">Results</a>
+        <a href="#" class="footer-link">Players</a>
+        <a href="#" class="footer-link">About</a>
+      </div>
+      
+      <div class="social-links">
+        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+      </div>
+      
+      <div class="copyright">
+        &copy; 2025 Haider Sports Cricket League. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
