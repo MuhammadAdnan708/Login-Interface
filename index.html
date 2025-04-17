@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -17,6 +19,7 @@
       --dark: #1a1a2e;
       --text: #333333;
       --card-bg: #ffffff;
+      
     }
     
     * {
@@ -128,9 +131,31 @@
       letter-spacing: 1px;
     }
     
+    /* Navigation */
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    
     /* Main Content */
     main {
       padding: 2rem 0 4rem;
+      position: relative;
     }
     
     .section-title {
@@ -291,6 +316,159 @@
       margin-top: 0.3rem;
     }
     
+    /* Modal */
+.schedule-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 30px;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.schedule-modal.active {
+  display: flex;
+}
+
+.schedule-container {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  width: 95%;
+  max-width: 950px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideUp 0.4s ease;
+  scroll-behavior: smooth;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Close Button (Fixed Inside Modal) */
+.close-btn {
+  position: sticky;
+  top: 10px;
+  float: right;
+  background: var(--accent);
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.1) rotate(90deg);
+  background: #e60000;
+}
+
+/* Header */
+.schedule-header {
+  background: linear-gradient(135deg, var(--primary), #1a56a5);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.schedule-header h2 {
+  font-size: 2.2rem;
+  margin: 0;
+}
+
+/* Content */
+.schedule-content {
+  padding: 2rem;
+}
+
+/* Table */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 15px;
+  overflow: hidden;
+}
+
+.schedule-table th {
+  background-color: var(--primary);
+  color: white;
+  padding: 14px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.schedule-table td {
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #e2e2e2;
+  transition: all 0.3s ease;
+}
+
+.schedule-table tr {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.schedule-table tr:nth-child(even) {
+  background-color: #fdfdfd;
+}
+
+.schedule-table tr:hover {
+  background-color: #eaf6ff;
+  transform: scale(1.005);
+}
+
+/* Rest Day */
+.rest-day {
+  background: #fff4d4;
+  color: #7a4f01;
+  font-weight: bold;
+  text-align: center;
+  padding: 14px;
+  font-size: 15px;
+  border-left: 5px solid var(--secondary);
+  border-radius: 4px;
+  animation: restAnim 0.4s ease;
+}
+
+@keyframes restAnim {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+    
     /* Footer */
     footer {
       background: var(--dark);
@@ -394,7 +572,106 @@
       opacity: 0.7;
       margin-top: 2rem;
     }
-    
+    /* Player Modal Enhancements */
+/* 🎯 Enhanced Player Modal Styling */
+#player-modal .schedule-container {
+  animation: popupBounce 0.35s ease;
+  border-radius: 20px;
+  background: linear-gradient(to bottom right, #ffffff, #f4f7ff);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+  padding-bottom: 1rem;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+@keyframes popupBounce {
+  0% {
+    transform: translateY(50px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+#player-modal .schedule-header {
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  
+}
+
+#player-modal .schedule-header h2 {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  
+}
+
+#player-list {
+  padding: 1rem 1.5rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  font-size: 1rem;
+  color: #333;
+}
+
+#player-list li {
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  background: rgba(12, 75, 138, 0.05);
+  border-left: 3px solid var(--primary);
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+#player-list li:hover {
+  background: rgba(12, 75, 138, 0.15);
+  transform: translateX(5px);
+}
+
+/* Optional: Smooth scrollbar for player list */
+#player-list::-webkit-scrollbar {
+  width: 8px;
+}
+#player-list::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+#player-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.team-name:hover {
+  text-decoration: underline;
+  color: var(--accent);
+  transition: 0.3s ease;
+}
+/* Modal Background (glass + blur) */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Popup Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+ 
     /* Responsive Adjustments */
     @media (max-width: 992px) {
       h1 {
@@ -440,6 +717,16 @@
       .team-name {
         font-size: 1rem;
       }
+      
+      .schedule-table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      .schedule-container {
+        width: 95%;
+        max-height: 85vh;
+      }
     }
     
     @media (max-width: 576px) {
@@ -447,7 +734,281 @@
         gap: 1.5rem;
         flex-direction: column;
       }
+      
+      .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .schedule-table td, 
+      .schedule-table th {
+        padding: 8px;
+        font-size: 0.9rem;
+      }
     }
+    @keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ✅ Modal Popup Backdrop */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ✅ Modal Content */
+
+
+@keyframes zoomIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ❌ Close Button */
+.close {
+  position: relative;
+  top: 0;
+  left: 95%;
+  background: #ff4d4d;
+  color: white;
+  font-size: 20px;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 40%;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+  z-index: 999;
+}
+
+.close:hover {
+  background: #e60000;
+  transform: rotate(90deg);
+}
+
+
+
+/* Modal Popup Animation */
+.modal-content {
+  width: 95%;
+  max-width: 1060px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: linear-gradient(to bottom right, #ffffff, #e6f0ff);
+  border-radius: 20px;
+  padding: 35px 30px;
+  left: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: scaleIn 0.4s ease-out;
+  transform-origin: center;
+  position: relative;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+
+
+/* Table */
+.points-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.points-table th {
+  background: linear-gradient(to right, #004e92, #000428);
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.points-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+}
+
+.points-table tr:nth-child(even) {
+  background: #f9fbff;
+}
+
+.points-table tr:hover {
+  background-color: #e1f0ff;
+  transition: 0.3s;
+}
+
+/* Match Result Form */
+.match-result-form {
+  margin-top: 30px;
+  background: linear-gradient(to bottom right, #e3f2fd, #fefefe);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #d0dbe7;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.match-result-form h3 {
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+/* Form Inputs */
+.match-result-form .form-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.match-result-form .form-group label {
+  width: 100%;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 5px;
+}
+
+.match-result-form input,
+.match-result-form select {
+  flex: 1 1 100%;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.match-result-form input:focus,
+.match-result-form select:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 6px rgba(25, 118, 210, 0.3);
+  outline: none;
+}
+
+/* Form Layout: Team A & B on separate lines */
+.match-result-form .team-line {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Buttons Line */
+.match-result-form .button-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+/* Buttons */
+.match-result-form button {
+  padding: 12px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  background: linear-gradient(to right, #0052d4, #4364f7);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.match-result-form button:hover {
+  background: linear-gradient(to right, #002661, #3d5afe);
+  transform: scale(1.05);
+}
+
+/* Special Buttons */
+button[onclick="resetPoints()"] {
+  margin-top: 20px;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+}
+button[onclick="resetPoints()"]:hover {
+  background: linear-gradient(to right, #ff1f48, #ff2c00);
+}
+
+button[onclick="downloadExcel()"] {
+
+  background: linear-gradient(to right, #11998e, #38ef7d);
+}
+button[onclick="downloadExcel()"]:hover {
+  background: linear-gradient(to right, #0f786a, #28cc6b);
+}
+
+/* Knockout Bracket */
+#knockoutBracket {
+  margin-top: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid #ddd;
+}
+
+#knockoutBracket h3 {
+  font-weight: 600;
+  color: #0d47a1;
+  margin-bottom: 10px;
+}
+
+#knockoutBracket ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#knockoutBracket li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .match-result-form input,
+  .match-result-form select {
+    width: 100%;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -460,10 +1021,14 @@
       <h1>Haider Sports Cricket League</h1>
       <div class="subtitle">Manga Cricket Tournament</div>
       <div class="season-badge">Season 2025</div>
+      <div class="nav-links">
+        <a href="#" class="nav-link" id="groups-link">Groups</a>
+       
+      </div>
     </div>
   </header>
   
-  <main>
+  <main id="main-content">
     <div class="container">
       <div class="section-title">
         <h2>Tournament Groups</h2>
@@ -481,8 +1046,7 @@
               <div class="team-details">
                 <div class="team-name">King XI</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Aftab
-                </span>
+                <span class="team-captain">Captain: Aftab</span>
               </div>
             </div>
             <div class="team-item">
@@ -490,8 +1054,7 @@
               <div class="team-details">
                 <div class="team-name">Combine XI</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Riaz
-                </span>
+                <span class="team-captain">Captain: Riaz</span>
               </div>
             </div>
             <div class="team-item">
@@ -499,8 +1062,7 @@
               <div class="team-details">
                 <div class="team-name">Kashan King</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Kashif
-                </span>
+                <span class="team-captain">Captain: Kashif</span>
               </div>
             </div>
             <div class="team-item">
@@ -508,8 +1070,7 @@
               <div class="team-details">
                 <div class="team-name">Sunrises</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Sabir
-                </span>
+                <span class="team-captain">Captain: Sabir</span>
               </div>
             </div>
             <div class="team-item">
@@ -517,8 +1078,7 @@
               <div class="team-details">
                 <div class="team-name">Manga Tiger</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Asif Pola
-                </span>
+                <span class="team-captain">Captain: Asif Pola</span>
               </div>
             </div>
             <div class="team-item">
@@ -526,8 +1086,7 @@
               <div class="team-details">
                 <div class="team-name">Zaitoon XI</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Zahid
-                </span>
+                <span class="team-captain">Captain: Zahid</span>
               </div>
             </div>
             <div class="team-item">
@@ -535,8 +1094,7 @@
               <div class="team-details">
                 <div class="team-name">Don XI</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Babar
-                </span>
+                <span class="team-captain">Captain: Babar</span>
               </div>
             </div>
           </div>
@@ -553,8 +1111,7 @@
               <div class="team-details">
                 <div class="team-name">Young Challenge</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Hasan butt
-                </span>
+                <span class="team-captain">Captain: Hasan Butt</span>
               </div>
             </div>
             <div class="team-item">
@@ -586,8 +1143,7 @@
               <div class="team-details">
                 <div class="team-name">Manga Gymkhana</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Babar
-                </span>
+                <span class="team-captain">Captain: Babar</span>
               </div>
             </div>
             <div class="team-item">
@@ -595,8 +1151,7 @@
               <div class="team-details">
                 <div class="team-name">Manga Sixer</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Tasawar
-                </span>
+                <span class="team-captain">Captain: Tasawar</span>
               </div>
             </div>
             <div class="team-item">
@@ -604,8 +1159,7 @@
               <div class="team-details">
                 <div class="team-name">Unique Star</div>
                 <div class="team-city">Manga Mandi</div>
-                <span class="team-captain">Captain: Chand Dogar
-                </span>
+                <span class="team-captain">Captain: Chand Dogar</span>
               </div>
             </div>
           </div>
@@ -613,7 +1167,168 @@
       </div>
     </div>
   </main>
+  <!-- Player Modal -->
+<div class="schedule-modal" id="player-modal">
+  <div class="schedule-container">
+    <button class="close-btn" id="close-player">&times;</button>
+    <div class="schedule-header">
+      <h2 id="player-modal-title">Team Players</h2>
+    </div>
+    <div class="schedule-content">
+      <ul id="player-list" style="list-style-type: disc; padding-left: 20px;"></ul>
+    </div>
+  </div>
+</div>
+
+  <!-- Schedule Modal -->
+  <div class="schedule-modal" id="schedule-modal">
+    <div class="schedule-container">
+      <button class="close-btn" id="close-schedule">&times;</button>
+      <div class="schedule-header">
+        <h2>Tournament Schedule 2025</h2>
+      </div>
+      <div class="schedule-content">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Match</th>
+              <th>Time</th>
+              <th>Wicket</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>20-04-25</td><td>Combine XI vs Don XI</td><td>09:00 AM</td><td>A king</td></tr>
+            <tr><td>20-04-25</td><td>Young Challenge vs Bhai XI</td><td>09:00 AM</td><td>B nasir</td></tr>
+            <tr><td>20-04-25</td><td>Manga Tiger vs Zaitoon XI</td><td>09:00 AM</td><td>C</td></tr>
+            <tr><td>20-04-25</td><td>Manga Sixer vs Unique Star</td><td>01:45 PM</td><td>A king</td></tr>
+            <tr><td>20-04-25</td><td>Kashan King vs Sunrises</td><td>01:45 PM</td><td>B nasir</td></tr>
+            <tr><td>20-04-25</td><td>Combine Star vs Gymkhana</td><td>01:45 PM</td><td>C</td></tr>
+            <tr><td colspan="4" class="rest-day">Rest: King XI and New Asian</td></tr>
+          
+            <tr><td>27-04-25</td><td>Combine Star vs Unique Star</td><td>09:00 AM</td><td>A king</td></tr>
+            <tr><td>27-04-25</td><td>New Asian vs Bhai XI</td><td>09:00 AM</td><td>B nasir</td></tr>
+            <tr><td>27-04-25</td><td>Don XI vs Sunrises</td><td>09:00 AM</td><td>C</td></tr>
+            <tr><td>27-04-25</td><td>King XI vs Zaitoon XI</td><td>01:45 PM</td><td>A king</td></tr>
+            <tr><td>27-04-25</td><td>Kashan King vs Combine XI</td><td>01:45 PM</td><td>B nasir</td></tr>
+            <tr><td>27-04-25</td><td>Young Challenge vs Manga Sixer</td><td>01:45 PM</td><td>C</td></tr>
+            <tr><td colspan="4" class="rest-day">Rest: Tiger and Gymkhana</td></tr>
+          
+            <tr><td>01-05-25</td><td>Young Challenge vs New Asian</td><td>09:00 AM</td><td>A king</td></tr>
+            <tr><td>01-05-25</td><td>Kashan King vs Zaitoon XI</td><td>09:00 AM</td><td>B nasir</td></tr>
+            <tr><td>01-05-25</td><td>Gymkhana vs Manga Sixer</td><td>09:00 AM</td><td>C</td></tr>
+            <tr><td>01-05-25</td><td>Bhai XI vs Unique Star</td><td>01:45 PM</td><td>A king</td></tr>
+            <tr><td>01-05-25</td><td>Don XI vs Manga Tiger</td><td>01:45 PM</td><td>B nasir</td></tr>
+            <tr><td>01-05-25</td><td>King XI vs Sunrises</td><td>01:45 PM</td><td>C</td></tr>
+            <tr><td colspan="4" class="rest-day">Rest: Combine XI and Combine Star</td></tr>
+          
+            <tr><td>04-05-25</td><td>King XI vs Combine XI</td><td>09:00 AM</td><td>A king</td></tr>
+            <tr><td>04-05-25</td><td>Sunrises vs Manga Tiger</td><td>09:00 AM</td><td>B nasir</td></tr>
+            <tr><td>04-05-25</td><td>Unique Star vs New Asian</td><td>09:00 AM</td><td>C</td></tr>
+            <tr><td>04-05-25</td><td>Gymkhana vs Bhai XI</td><td>01:45 PM</td><td>B nasir</td></tr>
+            <tr><td>04-05-25</td><td>Young Challenge vs Combine Star</td><td>01:45 PM</td><td>A king</td></tr>
+            <tr><td>04-05-25</td><td>Don XI vs Zaitoon XI</td><td>01:45 PM</td><td>C</td></tr>
+            <tr><td colspan="4" class="rest-day">Rest: Kashan King and Manga Sixer</td></tr>
+          
+            <tr><td>11-05-25</td><td>Bhai XI vs Manga Sixer</td><td>09:00 AM</td><td>A king</td></tr>
+            <tr><td>11-05-25</td><td>Unique Star vs Gymkhana</td><td>09:00 AM</td><td>B nasir</td></tr>
+            <tr><td>11-05-25</td><td>Combine XI vs Manga Tiger</td><td>09:00 AM</td><td>C</td></tr>
+            <tr><td>11-05-25</td><td>New Asian vs Combine Star</td><td>01:45 PM</td><td>A king</td></tr>
+            <tr><td>11-05-25</td><td>Zaitoon XI vs Sunrises</td><td>01:45 PM</td><td>B nasir</td></tr>
+            <tr><td>11-05-25</td><td>King XI vs Kashan King</td><td>01:45 PM</td><td>C</td></tr>
+            <tr><td colspan="4" class="rest-day">Rest: Don XI and Young Challenge</td></tr>
+          
+            <tr><td>18-05-25</td><td>Don XI vs King XI</td><td>09:00 AM</td><td>A king</td></tr>
+            <tr><td>18-05-25</td><td>Young Challenge vs Gymkhana</td><td>09:00 AM</td><td>B nasir</td></tr>
+            <tr><td>18-05-25</td><td>Manga Tiger vs Kashan King</td><td>09:00 AM</td><td>C</td></tr>
+            <tr><td>18-05-25</td><td>Manga Sixer vs New Asian</td><td>01:45 PM</td><td>A king</td></tr>
+            <tr><td>18-05-25</td><td>Sunrises vs Combine XI</td><td>01:45 PM</td><td>B nasir</td></tr>
+            <tr><td>18-05-25</td><td>Combine Star vs Bhai XI</td><td>01:45 PM</td><td>C</td></tr>
+            <tr><td colspan="4" class="rest-day">Rest: Unique Star and Zaitoon XI</td></tr>
+          
+            <tr><td>25-05-25</td><td>Young Challenge vs Unique Star</td><td>09:00 AM</td><td>A king</td></tr>
+            <tr><td>25-05-25</td><td>King XI vs Manga Tiger</td><td>09:00 AM</td><td>B nasir</td></tr>
+            <tr><td>25-05-25</td><td>New Asian vs Gymkhana</td><td>09:00 AM</td><td>C</td></tr>
+            <tr><td>25-05-25</td><td>Combine XI vs Zaitoon XI</td><td>01:45 PM</td><td>A king</td></tr>
+            <tr><td>25-05-25</td><td>Kashan King vs Don XI</td><td>01:45 PM</td><td>B nasir</td></tr>
+            <tr><td>25-05-25</td><td>Combine Star vs Manga Sixer</td><td>01:45 PM</td><td>C</td></tr>
+            <tr><td colspan="4" class="rest-day">Rest: Bhai XI and Sunrises</td></tr>
+          
+            <!-- Knockouts -->
+            <tr><td>01-06-25</td><td>1st A vs 3rd B</td><td>09:00 AM</td><td>B nasir</td></tr>
+            <tr><td>01-06-25</td><td>1st B vs 3rd A</td><td>09:00 AM</td><td>A king</td></tr>
+            <tr><td>01-06-25</td><td>2nd A vs 4th B</td><td>01:45 PM</td><td>A king</td></tr>
+            <tr><td>01-06-25</td><td>4th A vs 2nd B</td><td>01:45 PM</td><td>B nasir</td></tr>
+          
+            <tr><td colspan="4" class="rest-day">Semi Final</td></tr>
+            <tr><td>15-06-25</td><td>1st Winner vs 3rd Winner</td><td>11:00 AM</td><td>Nasir</td></tr>
+            <tr><td>15-06-25</td><td>4th Winner vs 2nd Winner</td><td>11:00 AM</td><td>A king</td></tr>
+          
+            <tr><td colspan="4" class="rest-day">Final</td></tr>
+            <tr><td>22-06-25</td><td>1st Winner vs 2nd Winner</td><td>11:00 AM</td><td>A king</td></tr>
+          </tbody>
+          
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- 🔥 Points Table Modal -->
+  <div id="resultModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeResultModal">&times;</span>
+      <h2 style="text-align: center; margin-bottom: 20px;">Points Table</h2>
+      
+      <div class="points-section">
+        <table class="points-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Team</th>
+              <th>MP</th>
+              <th>W</th>
+              <th>L</th>
+              <th>PTS</th>
+              <th>NRR</th>
+              
+            </tr>
+          </thead>
+          <tbody id="points-table-body">
+            <!-- Auto populated -->
+          </tbody>
+        </table>
   
+        <div class="match-result-form">
+          <h3 style="margin-top: 30px;">Enter Match Result</h3>
+  
+          <!-- Team A Inputs -->
+          <select id="teamA"><option disabled selected>Team A</option></select>
+          <input type="number" id="teamARuns" placeholder="Team A Runs" />
+          <input type="number" id="teamAOvers" placeholder="Team A Overs (e.g. 20.0)" step="0.1" />
+          
+  
+          <!-- Team B Inputs -->
+          <select id="teamB"><option disabled selected>Team B</option></select>
+          <input type="number" id="teamBRuns" placeholder="Team B Runs" />
+          <input type="number" id="teamBOvers" placeholder="Team B Overs (e.g. 20.0)" step="0.1" />
+        
+  
+          <button onclick="submitMatch()">Submit Result</button>
+          <!-- Inside your .match-result-form, after the Submit button -->
+<button type="button" onclick="resetPoints()" style="background: crimson; color: white; margin-left: 10px;">
+  Reset Table
+</button>
+
+  <button onclick="downloadExcel()" style="margin-top: 20px; background: green; color: white;">Export to Excel</button>
+          
+
+<div id="knockoutBracket">
+          <button  onclick="generateKnockout()" style="margin-top: 20px;">Generate Knockout Bracket</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-overlay"></div>
     <div class="container footer-content">
@@ -622,8 +1337,8 @@
       <div class="footer-links">
         <a href="#" class="footer-link">Home</a>
         <a href="#" class="footer-link">Teams</a>
-        <a href="#" class="footer-link">Schedule</a>
-        <a href="#" class="footer-link">Results</a>
+        <a href="#" class="footer-link" id="schedule-link">Schedule</a>
+        <a href="#" class="footer-link" id="openResultModal">Result</a>
         <a href="#" class="footer-link">Players</a>
         <a href="#" class="footer-link">About</a>
       </div>
@@ -640,5 +1355,367 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Schedule Modal Functionality
+    const scheduleLink = document.getElementById('schedule-link');
+    const scheduleModal = document.getElementById('schedule-modal');
+    const closeSchedule = document.getElementById('close-schedule');
+
+    scheduleLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      scheduleModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    });
+
+    closeSchedule.addEventListener('click', function() {
+      scheduleModal.classList.remove('active');
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+    });
+
+    // Close modal when clicking outside
+    scheduleModal.addEventListener('click', function(e) {
+      if (e.target === scheduleModal) {
+        scheduleModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Groups link functionality
+    const groupsLink = document.getElementById('groups-link');
+    
+    groupsLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (scheduleModal.classList.contains('active')) {
+        scheduleModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+      // Scroll to groups section
+      document.getElementById('main-content').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+    // ===========================
+// Player Modal Functionality
+// ===========================
+const playerModal = document.getElementById('player-modal');
+const closePlayer = document.getElementById('close-player');
+const playerList = document.getElementById('player-list');
+const playerModalTitle = document.getElementById('player-modal-title');
+
+const teamPlayers = {
+  "Don XI": ["M IRFAN", "RAMZAN", "BILAWAL", "BABAR (C)", "HUSNAIN", "MAKHAN", "LUQMAN", "SHEHRI", "SHEHZAD", "ABBAS", "HAMEED", "HASSAN", "ABDULLAE", "MAJID", "AZEEM", "Fayaz"],
+  "Kashan King": ["Kashi 22 (C)", "Waseem Chanda", "Muqeem Saho", "Shahbaz Bhatti", "Asif Jutt", "Nadir Abbasi", "Yasin", "Umar Hanif", "Rana Qurban", "Jalal Khan", "Ashraf Bhatti", "Abrar Khan", "Makees Shah", "Rafaqat Ali", "Shahzaib King"],
+  "Bhai XI": ["Ameer Hamza", "Master Aslam (C)", "Asim", "Saqlain", "Azam", "Nawaz", "Wajid", "Ahsan", "Tanveer", "Niaz", "Billy Shah", "Muneeb", "Imran", "Sajjad mana", "Mansoor Bhatti", "Arslan"],
+  "King XI": ["Aftab (C)", "Asad abbas", "Asad Kohli", "Hafiz ayuob", "Shoaib", "M Imran", "Qaisar", "Touseef", "Kashif", "Shair Afzal", "Sajjad khan", "Hamid", "M Naseem"],
+  "Zaitoon XI": ["Hafiz Azam", "M Zahid (C)", "Abbas", "Zaman pasha", "Rana shabi", "Adnan", "Ramzan", "Shakeel", "Umar fajja", "Arshad", "Talha", "Shazaib", "Zaman", "Akif"],
+  "Combine Star": ["Mohsin", "Mehboob (C)", "Rizwan", "Haris", "Hassan", "Bilal", "Kamran", "Aqib", "Rehan", "Atif", "Shahid", "Umer", "Asif", "Ibrar", "Abubakar", "Irfan"],
+  "Manga Tiger": ["Waqas", "Ahsan", "Asif Ali (C)", "Bakhtawar", "Shahzad kalla", "Usman Mughal", "Hanzla", "Shahzeb", "Bilal RJ", "Rana Asif", "Amir Badsha", "Nomi Dogar", "Rizwan lahori"],
+  "Unique Star": ["Chand (C)", "Waleed", "Waheed", "Kashif", "M Waseem", "Abdaal butt", "Rehmat", "Shazad prince", "Shahid", "Baba", "Nazim waraich", "Ahmad rehmani", "Haider", "Mubashir", "Waseem", "Zeeshan"],
+  "Combine XI": ["C.riaz (C)", "Rana Irfan", "Rana saleem", "M Imran", "Haji Hassan", "Rizwan bhatti", "Fayaz styne", "Malik Irfan", "Shani Jan", "M arslan", "Ghulam Rasool", "M Mohsin", "Mahmood", "Inaam", "M ijaz", "Shoaib", "M Awais"],
+  "Manga Sixer": ["Tasawar (C)", "Amir Ali", "Rashid Ali", "Farooq jutt", "M mubeen", "Sajid Ali", "Abid jutt", "Ismail khan", "Rukhsar khan", "M usama", "M Shoaib", "Sabir Ali", "Asad Ali", "K shazad"],
+  "Young Challenge": ["Hassan butt (C)", "Rana umer", "Rameez", "Babar Ali", "Noraiz", "Ali akbar", "M amir", "Abdulhaseeb", "Shani", "Afaq", "Hasnain", "Istkhar Ali", "Bilal", "Ali", "Javaid", "Master samran"]
+};
+
+// Make all .team-name clickable
+document.querySelectorAll('.team-name').forEach(el => {
+  el.style.cursor = "pointer";
+  el.addEventListener('click', () => {
+    const teamName = el.innerText.trim();
+    const players = teamPlayers[teamName];
+    if (players) {
+      playerModalTitle.innerText = teamName + " Players";
+      playerList.innerHTML = players.map(p => `<li>${p}</li>`).join("");
+      playerModal.classList.add('active');
+      document.body.classList.add('modal-open');
+      document.body.style.overflow = 'hidden';
+    } else {
+      playerList.innerHTML = "<li>No players found for this team.</li>";
+    }
+  });
+});
+
+closePlayer.addEventListener('click', () => {
+  playerModal.classList.remove('active');
+  document.body.classList.remove('modal-open');
+  document.body.style.overflow = 'auto';
+});
+
+playerModal.addEventListener('click', function(e) {
+  if (e.target === playerModal) {
+    playerModal.classList.remove('active');
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = 'auto';
+  }
+});
+// Open and close modal logic
+const resultModal = document.getElementById("resultModal");
+const openModalBtn = document.getElementById("openResultModal");
+const closeModalBtn = document.getElementById("closeResultModal");
+
+openModalBtn.onclick = () => {
+  resultModal.style.display = "block"; // Open modal
+  renderPointsTable(); // Refresh table every time it opens
+};
+
+closeModalBtn.onclick = () => {
+  resultModal.style.display = "none"; // Close modal
+};
+
+window.onclick = (e) => {
+  if (e.target === resultModal) {
+    resultModal.style.display = "none"; // Close modal if clicked outside
+  }
+};
+
+const groups = {
+  "Group A": ["Combine XI", "Don XI", "Young Challenge", "Bhai XI", "Manga Tiger", "Zaitoon XI", "Manga Sixer"],
+  "Group B": ["Unique Star", "Kashan King", "Sunrises", "Combine Star", "Gymkhana", "King XI", "New Asian"]
+};
+
+const teams = {};
+
+for (let group in groups) {
+  groups[group].forEach(team => {
+    teams[team] = {
+      group: group,
+      matches: 0, wins: 0, losses: 0, points: 0,
+      runsScored: 0, oversFaced: 0,
+      runsConceded: 0, oversBowled: 0,
+      // Added field for wickets
+      nrr: 0
+    };
+  });
+}
+
+// Load teams in dropdowns
+window.onload = () => {
+  const selects = [document.getElementById("teamA"), document.getElementById("teamB")];
+  selects.forEach(select => {
+    for (let team in teams) {
+      const option = document.createElement("option");
+      option.value = team;
+      option.textContent = team;
+      select.appendChild(option.cloneNode(true));
+    }
+  });
+  loadFromStorage();
+  renderPointsTable();
+};
+
+// Function to submit match result
+function submitMatch() {
+  const teamA = document.getElementById("teamA").value;
+  const teamB = document.getElementById("teamB").value;
+  const aRuns = parseInt(document.getElementById("teamARuns").value);
+  const aOvers = parseFloat(document.getElementById("teamAOvers").value);
+  const bRuns = parseInt(document.getElementById("teamBRuns").value);
+  const bOvers = parseFloat(document.getElementById("teamBOvers").value);
+  
+
+  if (!teamA || !teamB || teamA === teamB || isNaN(aRuns) || isNaN(aOvers) || isNaN(bRuns) || isNaN(bOvers)) {
+    alert("Please enter valid match result.");
+    return;
+  }
+
+  // Update team stats
+  updateMatch(teamA, teamB, aRuns, aOvers, bRuns, bOvers);
+  renderPointsTable();
+  saveToStorage();
+}
+
+// Update the team stats after match result
+function updateMatch(tA, tB, aR, aO, bR, bO, aW, bW) {
+  const A = teams[tA];
+  const B = teams[tB];
+
+  A.matches++; B.matches++;
+  A.runsScored += aR; A.oversFaced += aO;
+  A.runsConceded += bR; A.oversBowled += bO;
+
+  B.runsScored += bR; B.oversFaced += bO;
+  B.runsConceded += aR; B.oversBowled += aO;
+
+  
+
+  if (aR > bR) {
+    A.wins++; B.losses++; A.points += 2;
+  } else {
+    B.wins++; A.losses++; B.points += 2;
+  }
+
+  calculateNRR(tA);
+  calculateNRR(tB);
+}
+
+// Calculate NRR (Net Run Rate)
+function calculateNRR(team) {
+  const t = teams[team];
+  const runRateFor = t.runsScored / t.oversFaced;
+  const runRateAgainst = t.runsConceded / t.oversBowled;
+  t.nrr = parseFloat((runRateFor - runRateAgainst).toFixed(3));
+}
+
+// Render the points table
+function renderPointsTable() {
+  const body = document.getElementById("points-table-body");
+  body.innerHTML = "";
+
+  for (let group in groups) {
+    const header = document.createElement("tr");
+    header.innerHTML = `<td colspan="8" style="background:#eee; font-weight:bold">${group}</td>`;
+    body.appendChild(header);
+
+    const sorted = groups[group]
+      .map(name => [name, teams[name]])
+      .sort((a, b) => b[1].points - a[1].points || b[1].nrr - a[1].nrr);
+
+    sorted.forEach(([team, data], idx) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${idx + 1}</td>
+        <td>${team}</td>
+        <td>${data.matches}</td>
+        <td>${data.wins}</td>
+        <td>${data.losses}</td>
+        <td>${data.points}</td>
+        <td>${data.nrr}</td>
+        
+      `;
+      body.appendChild(row);
+    });
+  }
+}
+
+// Save the teams data to LocalStorage
+function saveToStorage() {
+  localStorage.setItem("pointsData", JSON.stringify(teams));
+}
+
+// Load data from LocalStorage
+function loadFromStorage() {
+  const data = JSON.parse(localStorage.getItem("pointsData"));
+  if (data) {
+    for (let team in data) {
+      if (teams[team]) {
+        teams[team] = { ...teams[team], ...data[team] };
+      }
+    }
+  }
+}
+
+// Export to Excel
+function downloadExcel() {
+  const wb = XLSX.utils.book_new();
+
+  for (const group in groups) {
+    const data = [["#", "Team", "MP", "W", "L", "PTS", "NRR"]];
+    const groupTeams = groups[group].map(name => [name, teams[name]])
+      .sort((a, b) => b[1].points - a[1].points || b[1].nrr - a[1].nrr);
+
+    groupTeams.forEach(([team, dataObj], i) => {
+      data.push([
+        i + 1,
+        team,
+        dataObj.matches,
+        dataObj.wins,
+        dataObj.losses,
+        dataObj.points,
+        dataObj.nrr,
+       
+      ]);
+    });
+
+    const sheet = XLSX.utils.aoa_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, sheet, group);
+  }
+
+  XLSX.writeFile(wb, "points_table.xlsx");
+}
+
+
+function resetPoints() {
+  if (!confirm("Are you sure you want to reset everything?")) return;
+
+  for (let team in teams) {
+    teams[team] = {
+      ...teams[team],
+      matches: 0, wins: 0, losses: 0, points: 0,
+      runsScored: 0, oversFaced: 0,
+      runsConceded: 0, oversBowled: 0,
+      nrr: 0
+    };
+  }
+
+  // 🧼 Clear knockout bracket
+  localStorage.removeItem("knockout");
+  document.getElementById("knockoutBracket").innerHTML = "";
+
+  saveToStorage();
+  renderPointsTable();
+}
+
+function generateKnockout() {
+  const groupA = groups["Group A"]
+    .map(name => ({ name, ...teams[name] }))
+    .sort((a, b) => b.points - a.points || b.nrr - a.nrr)
+    .slice(0, 4);
+
+  const groupB = groups["Group B"]
+    .map(name => ({ name, ...teams[name] }))
+    .sort((a, b) => b.points - a.points || b.nrr - a.nrr)
+    .slice(0, 4);
+
+  if (groupA.length < 4 || groupB.length < 4) {
+    alert("Not enough teams qualified from both groups.");
+    return;
+  }
+
+  const knockout = [
+    { title: "Quarter-Final 1", a: groupA[0].name, b: groupB[3].name },
+    { title: "Quarter-Final 2", a: groupA[1].name, b: groupB[2].name },
+    { title: "Quarter-Final 3", a: groupA[2].name, b: groupB[1].name },
+    { title: "Quarter-Final 4", a: groupA[3].name, b: groupB[0].name }
+  ];
+
+  // Save to localStorage
+  localStorage.setItem("knockout", JSON.stringify(knockout));
+
+  showKnockout(knockout);
+}
+function showKnockout(knockout) {
+  let knockoutHTML = `<h3>🏆 Knockout Bracket</h3><ul>`;
+  knockout.forEach(m => {
+    knockoutHTML += `<li><strong>${m.title}:</strong> ${m.a} vs ${m.b}</li>`;
+  });
+  knockoutHTML += `</ul>`;
+
+  const container = document.getElementById("knockoutBracket");
+  container.innerHTML = knockoutHTML;
+}
+window.onload = () => {
+  // Populate dropdowns
+  const selects = [document.getElementById("teamA"), document.getElementById("teamB")];
+  selects.forEach(select => {
+    for (let team in teams) {
+      const option = document.createElement("option");
+      option.value = team;
+      option.textContent = team;
+      select.appendChild(option.cloneNode(true));
+    }
+  });
+
+  loadFromStorage();
+  renderPointsTable();
+
+  // ✅ Show knockout bracket if it exists
+  const savedKnockout = localStorage.getItem("knockout");
+  if (savedKnockout) {
+    showKnockout(JSON.parse(savedKnockout));
+  }
+};
+
+
+  </script>
 </body>
 </html>
