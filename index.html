@@ -1013,7 +1013,9 @@ button[onclick="downloadExcel()"]:hover {
 </head>
 <body>
   <header>
+    
     <div class="header-overlay"></div>
+    
     <div class="container header-content">
       <div class="logo">
         <span>HSCL</span>
@@ -1404,6 +1406,9 @@ const playerList = document.getElementById('player-list');
 const playerModalTitle = document.getElementById('player-modal-title');
 
 const teamPlayers = {
+  "Manga Gymkhana": ["Babar Pasha (C)", "Rana Naveed", "Malik Imran", "Rao Naeem", "Umair Ali", "Ghazanffar", "Hammad", "Shahzad", "Nouman Iqbal", "Ali Shair Butt", "Zaibi Mughal", "Imran Mani", "Umer Butt", "Ali Pacer", "Tahir Mughal", "Talha"],
+  "Sunrises": ["Sabir", "Ehsan", "Waqar", "Moiz", "Ramzan Khan", "Usman", "Ahmed", "Farooq", "Hamza", "Ali Hamza", "Yasir", "Noman", "Bilal", "Ramzan Rana", "Arif", "Rehan"],
+  "Manga Sixer": ["Mehar Tasawar (C)", "Abbas Gujjar", "Amir Ali", "Farooq Jutt", "Dr. Sajid", "Hassan Ali", "Rashid Ali", "Ismail Khan", "Sohail Ahmad", "Sana Ullah", "Mehar Usama", "Rukhsar Khan", "Shahzad Ali", "Asad Ali", "Irfan Ali", "Sabir Ali", "M. Zeeshan"],
   "Don XI": ["M IRFAN", "RAMZAN", "BILAWAL", "BABAR (C)", "HUSNAIN", "MAKHAN", "LUQMAN", "SHEHRI", "SHEHZAD", "ABBAS", "HAMEED", "HASSAN", "ABDULLAE", "MAJID", "AZEEM", "Fayaz"],
   "Kashan King": ["Kashi 22 (C)", "Waseem Chanda", "Muqeem Saho", "Shahbaz Bhatti", "Asif Jutt", "Nadir Abbasi", "Yasin", "Umar Hanif", "Rana Qurban", "Jalal Khan", "Ashraf Bhatti", "Abrar Khan", "Makees Shah", "Rafaqat Ali", "Shahzaib King"],
   "ALFM": ["Ameer Hamza", "Master Aslam (C)", "Asim", "Saqlain", "Azam", "Nawaz", "Wajid", "Ahsan", "Tanveer", "Niaz", "Billy Shah", "Muneeb", "Imran", "Sajjad mana", "Mansoor Bhatti", "Arslan"],
@@ -1413,8 +1418,7 @@ const teamPlayers = {
   "Manga Tiger": ["Waqas", "Ahsan", "Asif Ali (C)", "Bakhtawar", "Shahzad kalla", "Usman Mughal", "Hanzla", "Shahzeb", "Bilal RJ", "Rana Asif", "Amir Badsha", "Nomi Dogar", "Rizwan lahori"],
   "Unique Star": ["Chand (C)", "Waleed", "Waheed", "Kashif", "M Waseem", "Abdaal butt", "Rehmat", "Shazad prince", "Shahid", "Baba", "Nazim waraich", "Ahmad rehmani", "Haider", "Mubashir", "Waseem", "Zeeshan"],
   "Combine XI": ["C.riaz (C)", "Rana Irfan", "Rana saleem", "M Imran", "Haji Hassan", "Rizwan bhatti", "Fayaz styne", "Malik Irfan", "Shani Jan", "M arslan", "Ghulam Rasool", "M Mohsin", "Mahmood", "Inaam", "M ijaz", "Shoaib", "M Awais"],
-  "Manga Sixer": ["Tasawar (C)", "Amir Ali", "Rashid Ali", "Farooq jutt", "M mubeen", "Sajid Ali", "Abid jutt", "Ismail khan", "Rukhsar khan", "M usama", "M Shoaib", "Sabir Ali", "Asad Ali", "K shazad"],
-  "Young Challenge": ["Hassan butt (C)", "Rana umer", "Rameez", "Babar Ali", "Noraiz", "Ali akbar", "M amir", "Abdulhaseeb", "Shani", "Afaq", "Hasnain", "Istkhar Ali", "Bilal", "Ali", "Javaid", "Master samran"]
+  "Young Challenge": ["Hassan butt (C)", "Rana umer", "Rameez", "Babar Ali", "Noraiz", "Abubakar", "M amir", "Abdulhaseeb", "Shani", "Afaq", "Ihtsham", "Istkhar Ali", "Tayab", "Ali", "Javaid", "Master samran","Tari"]
 };
 
 // Make all .team-name clickable
