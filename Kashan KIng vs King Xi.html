@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSCL Series Final | Kashan Kings vs King XI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1a3e72;
+      --secondary: #e63946;
+      --accent: #f4a261;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --success: #2a9d8f;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 25px 30px;
+      text-align: center;
+      position: relative;
+    }
+    
+    header h1 {
+      font-weight: 600;
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+    
+    header p {
+      font-weight: 300;
+      opacity: 0.9;
+    }
+    
+    .tournament-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--secondary);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .match-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background: rgba(26, 62, 114, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .match-info {
+      text-align: center;
+      flex-grow: 1;
+    }
+    
+    .match-date {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--primary);
+    }
+    
+    .match-time {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 3px;
+    }
+    
+    .match-venue {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 8px;
+      justify-content: center;
+    }
+    
+    .match-venue i {
+      margin-right: 5px;
+    }
+    
+    .teams-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 30px;
+      background: white;
+      position: relative;
+      min-height: 300px;
+    }
+    
+    .team {
+      text-align: center;
+      width: 40%;
+      padding: 20px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .team-logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #1a3e72 0%, #0c4b8a 100%);
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 3px solid #f4a261;
+      overflow: hidden;
+    }
+
+    .team-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    
+    .team-name {
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+    
+    .team-vs {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--secondary);
+      margin: 0 20px;
+    }
+    
+    .players-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .players-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+    
+    .players-btn i {
+      margin-left: 5px;
+      font-size: 0.8rem;
+    }
+    
+    .match-details {
+      padding: 20px 30px;
+      background: var(--light);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .details-title {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .details-title i {
+      margin-right: 10px;
+    }
+    
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    
+    .detail-item {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .detail-label {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 5px;
+    }
+    
+    .detail-value {
+      font-weight: 500;
+    }
+    
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--secondary);
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    
+    .player-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .player-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+    
+    .player-number {
+      background: var(--primary);
+      color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 0.8rem;
+    }
+    
+    .player-captain {
+      background: var(--success);
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 10px;
+    }
+    
+    @media (max-width: 768px) {
+      .teams-container {
+        flex-direction: column;
+      }
+      
+      .team {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      
+      .team-vs {
+        margin: 20px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="tournament-badge">HSCL 2025</div>
+    <h1>Simple  Match</h1>
+    <p>Two Championship teams match  </p>
+  </header>
+  
+  <div class="match-header">
+    <div class="match-info">
+      <div class="match-date">10th August 2025</div>
+      <div class="match-time">10:00 AM (GMT+5)</div>
+      <div class="match-venue">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>new Lahore city</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="teams-container">
+    <div class="team" onclick="showPlayers('Kashan Kings')">
+      <div class="team-logo"><img src="./kashan king.jpg" alt="Kashan Kings Logo"></div>
+      <h3 class="team-name">Kashan Kings</h3>
+      <button class="players-btn">View Squad <i class="fas fa-chevron-right"></i></button>
+    </div>
+    
+    <div class="team-vs">VS</div>
+    
+    <div class="team" onclick="showPlayers('King XI')">
+      <div class="team-logo"><img src="./king xi.jpg" alt="King XI Logo"></div>
+      <h3 class="team-name">King XI</h3>
+      <button class="players-btn">View Squad <i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+  
+  <div class="match-details">
+    <h3 class="details-title"><i class="fas fa-info-circle"></i> Match Details</h3>
+    <div class="details-grid">
+      <div class="detail-item">
+        <div class="detail-label">Match Format</div>
+        <div class="detail-value">T30</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Overs</div>
+        <div class="detail-value">30 per side</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Umpires</div>
+        <div class="detail-value">TBA</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Weather</div>
+        <div class="detail-value">Sunny, 32°C</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Player Modal -->
+<div class="modal" id="playerModal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal()">&times;</button>
+    <h3 id="modalTitle">Team Players</h3>
+    <ul class="player-list" id="playerList"></ul>
+  </div>
+</div>
+
+<script>
+  const players = {
+    "Kashan Kings": [
+      {name: "Kashi 22", isCaptain: true},
+      {name: "Muqeem", isCaptain: false},
+      {name: "Waqar", isCaptain: false},
+      {name: "Lbrar Khan", isCaptain: false},
+      {name: "Nadir", isCaptain: false},
+      {name: "Umar Hanif", isCaptain: false},
+      {name: "Yasin", isCaptain: false},
+      {name: "Asif", isCaptain: false},
+      {name: "Talha", isCaptain: false},
+      {name: "Zahid", isCaptain: false},
+      {name: "Rashid", isCaptain: false},
+      {name: "Mohsin", isCaptain: false}
+    ],
+    "King XI": [
+      {name: "M Naseem", isCaptain: true},
+      {name: "Asad Abbas", isCaptain: false},
+      {name: "Asad K", isCaptain: false},
+      {name: "Ahmad", isCaptain: false},
+      {name: "Hamid", isCaptain: false},
+      {name: "Ali Husnain", isCaptain: false},
+      {name: "Affaq", isCaptain: false},
+      {name: "Sajjad Khan", isCaptain: false},
+      {name: "Qaiser", isCaptain: false},
+      {name: "Imran", isCaptain: false},
+      {name: "Awais Masti", isCaptain: false},
+      {name: "Touseef", isCaptain: false},
+      {name: "Shoaib", isCaptain: false}
+    ]
+  };
+
+  function showPlayers(teamName) {
+    const modal = document.getElementById('playerModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const playerList = document.getElementById('playerList');
+
+    modalTitle.textContent = teamName + " Players";
+    playerList.innerHTML = "";
+
+    if (players[teamName].length > 0) {
+      players[teamName].forEach((player, index) => {
+        const li = document.createElement('li');
+        li.className = 'player-item';
+        
+        li.innerHTML = `
+          <div class="player-number">${index + 1}</div>
+          <div class="player-name">${player.name}</div>
+          ${player.isCaptain ? '<div class="player-captain">Captain</div>' : ''}
+        `;
+        
+        playerList.appendChild(li);
+      });
+    } else {
+      playerList.innerHTML = `
+        <li style="text-align: center; color: var(--gray); padding: 20px 0;">
+          Team squad will be announced soon
+        </li>
+      `;
+    }
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('playerModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Close modal when clicking outside
+  document.getElementById('playerModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeModal();
+    }
+  });
+</script>
+
+</body>
+</html>
